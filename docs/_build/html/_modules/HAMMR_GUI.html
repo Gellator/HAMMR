@@ -1,0 +1,420 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xml:lang="" lang="" version="-//W3C//DTD XHTML 1.1//EN" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="">
+    <link rel="icon" type="image/x-icon" href="">
+
+  
+  <title>HAMMR_GUI &mdash; HAMMR 1.0 documentation</title>
+  
+
+  
+
+  
+
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'/>
+
+
+  <link rel="stylesheet" href="../_static/css/img.css" type="text/css"/>
+  
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../_static/css/pdj.css" type="text/css" />
+  
+
+  
+
+  <link rel="stylesheet" href="../_static/css/darker.css" type="text/css" media="(prefers-color-scheme: dark)"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="HAMMR 1.0 documentation" href="../index.html"/>
+        <link rel="up" title="Module code" href="index.html"/>
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="cache-control" content="public" />
+    <meta name="robots" content="follow, all" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Add jQuery library -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+    <script type="module" src="https://googlechromelabs.github.io/dark-mode-toggle/src/dark-mode-toggle.mjs"></script>
+
+  </head>
+
+  <body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+	
+        <a href="../index.html" class="fa fa-home"> HAMMR </a>
+	
+	
+        <div role="search">
+	  
+	  <form id ="rtd-search-form" class="wy-form"
+		action="../search.html" method="get">
+	    <input type="text" name="q" placeholder="Search docs" />
+	    <input type="hidden" name="check_keywords" value="yes" />
+	    <input type="hidden" name="area" value="default" />
+	  </form>
+	  
+	</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	
+          
+          
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+          
+        
+
+      </div>
+      &nbsp;
+    </nav>
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      <nav class="wy-nav-top" id="barra-mobile" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="#">HAMMR </a>
+      </nav>
+
+      <div class="wy-nav-content">
+	<div class="fundo-claro">
+	</div>
+	<div class="fundo-escuro">
+	</div>
+
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+	    
+	    <!-- <ul class="wy-breadcrumbs"> -->
+	    <!--   <li><a href="#">Docs</a> &raquo;</li> -->
+
+	    <!--   <li>Features</li> -->
+	    <!--   <li class="wy-breadcrumbs-aside"> -->
+
+	    <!-- 	<a href="_sources/index.txt" rel="nofollow"> View page source</a> -->
+
+	    <!--   </li> -->
+	    <!-- </ul> -->
+	    <!-- <hr/> -->
+	  </div>
+          <div role="main" class="">
+
+	    <div id="content" class="hfeed entry-container hentry">
+      	<div id="dark-mode-toggle-container">
+	  <dark-mode-toggle appearance="toggle" dark="switch to light mode" light="switch to dark mode">
+	  </dark-mode-toggle>
+	</div>
+  <h1>Source code for HAMMR_GUI</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">customtkinter</span> <span class="k">as</span> <span class="nn">ctk</span>
+<span class="kn">from</span> <span class="nn">tkinter</span> <span class="kn">import</span> <span class="n">filedialog</span><span class="p">,</span> <span class="n">IntVar</span>
+<span class="kn">from</span> <span class="nn">HAMMR_SupportMethods</span> <span class="kn">import</span> <span class="p">(</span><span class="n">GetAllFilesRelatedToMethod</span><span class="p">,</span><span class="n">SetMethodLibrariesToLocalVersion</span><span class="p">,</span><span class="n">CopyFileToLocation</span><span class="p">,</span>
+                                  <span class="n">SetMethodLibrariesToRepoVersion</span><span class="p">,</span><span class="n">SetMethodLayoutToLocalLayout</span><span class="p">,</span><span class="n">GetFoldersInDir</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">HAMMR_CheckSumConstructor</span> <span class="kn">import</span> <span class="n">SetFilesToAddCheckSum</span>
+
+<span class="n">ctk</span><span class="o">.</span><span class="n">set_appearance_mode</span><span class="p">(</span><span class="s2">&quot;dark&quot;</span><span class="p">)</span>
+<span class="n">ctk</span><span class="o">.</span><span class="n">set_default_color_theme</span><span class="p">(</span><span class="s2">&quot;green&quot;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="App">
+<a class="viewcode-back" href="../HAMMR_GUI.html#HAMMR_GUI.App">[docs]</a>
+<span class="k">class</span> <span class="nc">App</span><span class="p">(</span><span class="n">ctk</span><span class="o">.</span><span class="n">CTk</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">File_to_Convert</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Robot_dict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">FilesToMove</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fileDonor</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;HAMMR&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="mi">1100</span><span class="si">}</span><span class="s2">x</span><span class="si">{</span><span class="mi">580</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">grid_columnconfigure</span><span class="p">((</span><span class="mi">1</span><span class="p">),</span> <span class="n">weight</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">grid_columnconfigure</span><span class="p">((</span> <span class="mi">2</span> <span class="p">,</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">weight</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">grid_rowconfigure</span><span class="p">((</span><span class="mi">0</span><span class="p">),</span> <span class="n">weight</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">grid_rowconfigure</span><span class="p">((</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">weight</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">center_label</span> <span class="o">=</span> <span class="n">ctk</span><span class="o">.</span><span class="n">CTkLabel</span><span class="p">(</span><span class="n">master</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Hamilton Automation Method Manager Repository&quot;</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;DM Sans&quot;</span><span class="p">,</span> <span class="mi">24</span><span class="p">),</span> <span class="n">compound</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">anchor</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">center_label</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">columnspan</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+
+        <span class="c1">#region create sidebar frame with widgets</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sidebar_frame</span> <span class="o">=</span> <span class="n">ctk</span><span class="o">.</span><span class="n">CTkFrame</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">140</span><span class="p">,</span> <span class="n">corner_radius</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sidebar_frame</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">rowspan</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="s2">&quot;nsew&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sidebar_frame</span><span class="o">.</span><span class="n">grid_rowconfigure</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logo_label</span> <span class="o">=</span> <span class="n">ctk</span><span class="o">.</span><span class="n">CTkLabel</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sidebar_frame</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Process Selection&quot;</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="n">ctk</span><span class="o">.</span><span class="n">CTkFont</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logo_label</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sidebar_button_1</span> <span class="o">=</span> <span class="n">ctk</span><span class="o">.</span><span class="n">CTkButton</span><span class="p">(</span><span class="n">master</span><span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sidebar_frame</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Convert Method to local Libraries&quot;</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="k">lambda</span> <span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">SelectPage</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sidebar_button_1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ConvertMethodToRepoLibrariesPage</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sidebar_button_1</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sidebar_button_2</span> <span class="o">=</span> <span class="n">ctk</span><span class="o">.</span><span class="n">CTkButton</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sidebar_frame</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Deploy Method to Fleet&quot;</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="k">lambda</span> <span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">SelectPage</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sidebar_button_2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">DeployMethodPage</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sidebar_button_2</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sidebar_button_3</span> <span class="o">=</span> <span class="n">ctk</span><span class="o">.</span><span class="n">CTkButton</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sidebar_frame</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Convert Method to Repo Libraries&quot;</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="k">lambda</span> <span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">SelectPage</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sidebar_button_3</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ConvertMethodToRepoLibrariesPage</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sidebar_button_3</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sidebar_button_1</span><span class="o">.</span><span class="n">_fg_color</span><span class="p">)</span>
+        <span class="c1">#endregion    </span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">center_frame</span> <span class="o">=</span> <span class="n">ctk</span><span class="o">.</span><span class="n">CTkFrame</span><span class="p">(</span><span class="n">master</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span><span class="n">fg_color</span><span class="o">=</span><span class="s2">&quot;transparent&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">center_frame</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">rowspan</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">columnspan</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span> <span class="n">pady</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">sticky</span><span class="o">=</span><span class="s2">&quot;nsew&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">center_frame</span><span class="o">.</span><span class="n">grid_rowconfigure</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">center_frame</span><span class="o">.</span><span class="n">grid_columnconfigure</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="n">weight</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>    
+
+    <span class="c1">#region Page Constructors</span>
+<div class="viewcode-block" id="App.SelectPage">
+<a class="viewcode-back" href="../HAMMR_GUI.html#HAMMR_GUI.App.SelectPage">[docs]</a>
+    <span class="k">def</span> <span class="nf">SelectPage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">btn</span><span class="p">,</span> <span class="n">page</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">DeselectPageButtons</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Delete_Pages</span><span class="p">()</span>
+        <span class="n">btn</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">fg_color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+        <span class="n">page</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="App.DeselectPageButtons">
+<a class="viewcode-back" href="../HAMMR_GUI.html#HAMMR_GUI.App.DeselectPageButtons">[docs]</a>
+    <span class="k">def</span> <span class="nf">DeselectPageButtons</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sidebar_button_1</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">fg_color</span><span class="o">=</span><span class="s2">&quot;#2FA572&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sidebar_button_2</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">fg_color</span><span class="o">=</span><span class="s2">&quot;#2FA572&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sidebar_button_3</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">fg_color</span><span class="o">=</span><span class="s2">&quot;#2FA572&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="App.HomePage">
+<a class="viewcode-back" href="../HAMMR_GUI.html#HAMMR_GUI.App.HomePage">[docs]</a>
+    <span class="k">def</span> <span class="nf">HomePage</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">center_HomePage</span> <span class="o">=</span> <span class="n">ctk</span><span class="o">.</span><span class="n">CTkFrame</span><span class="p">(</span><span class="n">master</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">center_frame</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">center_HomePage</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">rowspan</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">columnspan</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span> <span class="n">pady</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">sticky</span><span class="o">=</span><span class="s2">&quot;nsew&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">center_HomePage</span><span class="o">.</span><span class="n">grid_rowconfigure</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">HomeLabel</span> <span class="o">=</span> <span class="n">ctk</span><span class="o">.</span><span class="n">CTkLabel</span><span class="p">(</span><span class="n">master</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">center_HomePage</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Welcome&quot;</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;DM Sans&quot;</span><span class="p">,</span> <span class="mi">24</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">HomeLabel</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">columnspan</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="App.ConvertMethodToLocalLibrariesPage">
+<a class="viewcode-back" href="../HAMMR_GUI.html#HAMMR_GUI.App.ConvertMethodToLocalLibrariesPage">[docs]</a>
+    <span class="k">def</span> <span class="nf">ConvertMethodToLocalLibrariesPage</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">center_ToLocalLibrariesPage</span> <span class="o">=</span> <span class="n">ctk</span><span class="o">.</span><span class="n">CTkFrame</span><span class="p">(</span><span class="n">master</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">center_frame</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">center_ToLocalLibrariesPage</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">rowspan</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">columnspan</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span> <span class="n">pady</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">sticky</span><span class="o">=</span><span class="s2">&quot;nsew&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ToLocalLibrariesPageLabel</span> <span class="o">=</span> <span class="n">ctk</span><span class="o">.</span><span class="n">CTkLabel</span><span class="p">(</span><span class="n">master</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">center_ToLocalLibrariesPage</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Welcome&quot;</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;DM Sans&quot;</span><span class="p">,</span> <span class="mi">24</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ToLocalLibrariesPageLabel</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">columnspan</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">center_ToLocalLibrariesPageConfirmButton</span> <span class="o">=</span> <span class="n">ctk</span><span class="o">.</span><span class="n">CTkButton</span><span class="p">(</span><span class="n">master</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">center_ToLocalLibrariesPage</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Confirm&quot;</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ConvertToLocalLibraries</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;DM Sans&quot;</span><span class="p">,</span> <span class="mi">24</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">center_ToLocalLibrariesPageConfirmButton</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">columnspan</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">center_ToLocalLibrariesPageConfirmButton</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">state</span> <span class="o">=</span> <span class="s2">&quot;disabled&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">center_ToLocalLibrariesPageDonorPathLabel</span> <span class="o">=</span> <span class="n">ctk</span><span class="o">.</span><span class="n">CTkLabel</span><span class="p">(</span><span class="n">master</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">center_ToLocalLibrariesPage</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot; None Selected&quot;</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;DM Sans&quot;</span><span class="p">,</span> <span class="mi">24</span><span class="p">),</span> <span class="n">text_color</span><span class="o">=</span> <span class="s2">&quot;red&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">center_ToLocalLibrariesPageDonorPathLabel</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">center_ToLocalLibrariesPageSelectMethodButton</span> <span class="o">=</span> <span class="n">ctk</span><span class="o">.</span><span class="n">CTkButton</span><span class="p">(</span><span class="n">master</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">center_ToLocalLibrariesPage</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Select Method&quot;</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="k">lambda</span> <span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">GetMethodForConvert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">center_ToLocalLibrariesPageConfirmButton</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">center_ToLocalLibrariesPageDonorPathLabel</span><span class="p">),</span> <span class="n">width</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;DM Sans&quot;</span><span class="p">,</span> <span class="mi">24</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">center_ToLocalLibrariesPageSelectMethodButton</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">columnspan</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="App.ConvertMethodToRepoLibrariesPage">
+<a class="viewcode-back" href="../HAMMR_GUI.html#HAMMR_GUI.App.ConvertMethodToRepoLibrariesPage">[docs]</a>
+    <span class="k">def</span> <span class="nf">ConvertMethodToRepoLibrariesPage</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">center_MethodToRepoLibrariesPage</span> <span class="o">=</span> <span class="n">ctk</span><span class="o">.</span><span class="n">CTkFrame</span><span class="p">(</span><span class="n">master</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">center_frame</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">center_MethodToRepoLibrariesPage</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">rowspan</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">columnspan</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span> <span class="n">pady</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">sticky</span><span class="o">=</span><span class="s2">&quot;nsew&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">center_MethodToRepoLibrariesPageLabel</span> <span class="o">=</span> <span class="n">ctk</span><span class="o">.</span><span class="n">CTkLabel</span><span class="p">(</span><span class="n">master</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">center_MethodToRepoLibrariesPage</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Welcome&quot;</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;DM Sans&quot;</span><span class="p">,</span> <span class="mi">24</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">center_MethodToRepoLibrariesPageLabel</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">columnspan</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">center_MethodToRepoLibrariesPageSelectMethodButton</span> <span class="o">=</span> <span class="n">ctk</span><span class="o">.</span><span class="n">CTkButton</span><span class="p">(</span><span class="n">master</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">center_MethodToRepoLibrariesPage</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Select Method&quot;</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="k">lambda</span> <span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">GetMethodForConvert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">center_MethodToRepoLibrariesPageConfirmButton</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">center_MethodToRepoLibrariesPageDonorPathLabel</span><span class="p">),</span> <span class="n">width</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;DM Sans&quot;</span><span class="p">,</span> <span class="mi">24</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">center_MethodToRepoLibrariesPageSelectMethodButton</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">columnspan</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">center_MethodToRepoLibrariesPageDonorPathLabel</span> <span class="o">=</span> <span class="n">ctk</span><span class="o">.</span><span class="n">CTkLabel</span><span class="p">(</span><span class="n">master</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">center_MethodToRepoLibrariesPage</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot; None Selected&quot;</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;DM Sans&quot;</span><span class="p">,</span> <span class="mi">24</span><span class="p">),</span> <span class="n">text_color</span><span class="o">=</span> <span class="s2">&quot;red&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">center_MethodToRepoLibrariesPageDonorPathLabel</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">center_MethodToRepoLibrariesPageConfirmButton</span> <span class="o">=</span> <span class="n">ctk</span><span class="o">.</span><span class="n">CTkButton</span><span class="p">(</span><span class="n">master</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">center_MethodToRepoLibrariesPage</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Confirm&quot;</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ConvertToRepoLibraries</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;DM Sans&quot;</span><span class="p">,</span> <span class="mi">24</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">center_MethodToRepoLibrariesPageConfirmButton</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">columnspan</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">center_MethodToRepoLibrariesPageConfirmButton</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">state</span> <span class="o">=</span> <span class="s2">&quot;disabled&quot;</span><span class="p">)</span> </div>
+
+<div class="viewcode-block" id="App.DeployMethodPage">
+<a class="viewcode-back" href="../HAMMR_GUI.html#HAMMR_GUI.App.DeployMethodPage">[docs]</a>
+    <span class="k">def</span> <span class="nf">DeployMethodPage</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">center_DeployMethodPage</span> <span class="o">=</span> <span class="n">ctk</span><span class="o">.</span><span class="n">CTkFrame</span><span class="p">(</span><span class="n">master</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">center_frame</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">center_DeployMethodPage</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">rowspan</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">columnspan</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span> <span class="n">pady</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">sticky</span><span class="o">=</span><span class="s2">&quot;nsew&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">center_DonorPathtitle</span> <span class="o">=</span> <span class="n">ctk</span><span class="o">.</span><span class="n">CTkLabel</span><span class="p">(</span><span class="n">master</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">center_DeployMethodPage</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Method to deploy:&quot;</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;DM Sans&quot;</span><span class="p">,</span> <span class="mi">24</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">center_DonorPathtitle</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">columnspan</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">center_DonorPathLabel</span> <span class="o">=</span> <span class="n">ctk</span><span class="o">.</span><span class="n">CTkLabel</span><span class="p">(</span><span class="n">master</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">center_DeployMethodPage</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot; None Selected&quot;</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;DM Sans&quot;</span><span class="p">,</span> <span class="mi">24</span><span class="p">),</span> <span class="n">text_color</span><span class="o">=</span> <span class="s2">&quot;red&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">center_DonorPathLabel</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">center_SelectMethodButton</span> <span class="o">=</span> <span class="n">ctk</span><span class="o">.</span><span class="n">CTkButton</span><span class="p">(</span><span class="n">master</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">center_DeployMethodPage</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Select Method&quot;</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">GetMethodFiles</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;DM Sans&quot;</span><span class="p">,</span> <span class="mi">24</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">center_SelectMethodButton</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">columnspan</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">center_SelectDeploymentButton</span> <span class="o">=</span> <span class="n">ctk</span><span class="o">.</span><span class="n">CTkButton</span><span class="p">(</span><span class="n">master</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">center_DeployMethodPage</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Deploy to selected sites&quot;</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">DeployMethodToSelectedRobots</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">center_SelectDeploymentButton</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">columnspan</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">center_SelectDeploymentButton</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="s2">&quot;disabled&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">checkbox_slider_frame</span> <span class="o">=</span> <span class="n">ctk</span><span class="o">.</span><span class="n">CTkFrame</span><span class="p">(</span><span class="n">master</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">center_DeployMethodPage</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">checkbox_slider_frame</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">columnspan</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span> <span class="n">pady</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span> <span class="n">sticky</span><span class="o">=</span><span class="s2">&quot;nsew&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">CreateCheckBoxPerDestination</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">checkbox_slider_frame</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="App.Delete_Pages">
+<a class="viewcode-back" href="../HAMMR_GUI.html#HAMMR_GUI.App.Delete_Pages">[docs]</a>
+    <span class="k">def</span> <span class="nf">Delete_Pages</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">frame</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">center_frame</span><span class="o">.</span><span class="n">winfo_children</span><span class="p">():</span>
+            <span class="n">frame</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span></div>
+
+    <span class="c1">#endregion</span>
+
+    <span class="c1">#region App Functions</span>
+    <span class="c1"># really need to abstract this out to clean up code base -SG</span>
+<div class="viewcode-block" id="App.DeployMethodToSelectedRobots">
+<a class="viewcode-back" href="../HAMMR_GUI.html#HAMMR_GUI.App.DeployMethodToSelectedRobots">[docs]</a>
+    <span class="k">def</span> <span class="nf">DeployMethodToSelectedRobots</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">_filesToCheckSum</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">multi</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">Robot_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="n">get</span><span class="p">():</span>
+                <span class="n">prefix</span> <span class="o">=</span><span class="s2">&quot;C:\Program Files (x86)\HAMILTON\Repo\ProDevHamilton/&quot;</span>
+                <span class="n">MethodDestination</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="n">key</span> <span class="o">+</span><span class="s1">&#39;/Methods&#39;</span>
+                <span class="n">layoutFolder</span> <span class="o">=</span>  <span class="n">prefix</span> <span class="o">+</span> <span class="n">key</span> <span class="o">+</span><span class="s1">&#39;/Layouts&#39;</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">FilesToMove</span><span class="p">)):</span>
+                    <span class="n">file</span> <span class="o">=</span> <span class="n">CopyFileToLocation</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">FilesToMove</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">MethodDestination</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="c1"># the first file is always teh .HSL file since it is appended first see GetMethodFiles() -SG</span>
+                        <span class="n">SetMethodLayoutToLocalLayout</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">layoutFolder</span><span class="p">)</span>
+                        <span class="n">hslFile</span> <span class="o">=</span> <span class="n">file</span>
+                <span class="k">if</span> <span class="n">multi</span><span class="p">:</span>
+                    <span class="n">_filesToCheckSum</span> <span class="o">=</span> <span class="n">_filesToCheckSum</span> <span class="o">+</span><span class="s2">&quot;;&quot;</span><span class="o">+</span> <span class="n">hslFile</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">_filesToCheckSum</span> <span class="o">=</span> <span class="n">_filesToCheckSum</span> <span class="o">+</span> <span class="n">hslFile</span>
+                <span class="k">if</span> <span class="n">hslFile</span><span class="p">:</span>
+                    <span class="n">multi</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">center_SelectDeploymentButton</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="s2">&quot;disabled&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">center_DonorPathLabel</span><span class="o">.</span><span class="n">_text</span> <span class="o">=</span> <span class="s2">&quot;Method has been deployed Continue with Checksum&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">FilesToMove</span> <span class="o">=</span> <span class="p">[]</span> 
+        <span class="n">SetFilesToAddCheckSum</span><span class="p">(</span><span class="n">_filesToCheckSum</span><span class="p">)</span></div>
+
+        <span class="c1">#PyHamilton_AddMultipleCheckSums(_filesToCheckSum)</span>
+<div class="viewcode-block" id="App.CreateCheckBoxPerDestination">
+<a class="viewcode-back" href="../HAMMR_GUI.html#HAMMR_GUI.App.CreateCheckBoxPerDestination">[docs]</a>
+    <span class="k">def</span> <span class="nf">CreateCheckBoxPerDestination</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">masterframe</span><span class="p">):</span>
+        <span class="n">folders</span> <span class="o">=</span> <span class="n">GetFoldersInDir</span><span class="p">(</span><span class="s2">&quot;C:\Program Files (x86)\HAMILTON\Repo\ProDevHamilton&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">folder</span> <span class="ow">in</span> <span class="n">folders</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Robot_dict</span><span class="p">[</span><span class="n">folder</span><span class="p">]</span> <span class="o">=</span><span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">key</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Robot_dict</span><span class="p">,</span><span class="mi">1</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Robot_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">IntVar</span><span class="p">()</span>
+            <span class="n">e</span> <span class="o">=</span> <span class="n">ctk</span><span class="o">.</span><span class="n">CTkCheckBox</span><span class="p">(</span><span class="n">master</span><span class="o">=</span><span class="n">masterframe</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="n">key</span><span class="p">,</span> <span class="n">variable</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">Robot_dict</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+            <span class="n">e</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="n">i</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span> <span class="n">padx</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="s2">&quot;nwe&quot;</span><span class="p">)</span> </div>
+
+<div class="viewcode-block" id="App.GetMethodForConvert">
+<a class="viewcode-back" href="../HAMMR_GUI.html#HAMMR_GUI.App.GetMethodForConvert">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetMethodForConvert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ConfirmButton</span><span class="p">,</span><span class="n">Label</span><span class="p">):</span> 
+        <span class="n">input_file_Raw</span> <span class="o">=</span> <span class="n">filedialog</span><span class="o">.</span><span class="n">askopenfile</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Select input file&#39;</span><span class="p">,</span> <span class="n">filetypes</span><span class="o">=</span><span class="p">((</span><span class="s1">&#39;HSL Files&#39;</span><span class="p">,</span> <span class="s1">&#39;*.hsl&#39;</span><span class="p">),))</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">input_file_Raw</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;No input file selected. Exiting...&#39;</span><span class="p">)</span>
+            <span class="n">ConfirmButton</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">state</span> <span class="o">=</span> <span class="s2">&quot;disabled&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">File_to_Convert</span> <span class="o">=</span> <span class="n">input_file_Raw</span><span class="o">.</span><span class="n">name</span>
+            <span class="n">Label</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">text</span><span class="o">=</span> <span class="n">input_file_Raw</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="n">ConfirmButton</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span> <span class="n">state</span><span class="o">=</span><span class="s2">&quot;enabled&quot;</span><span class="p">)</span>  </div>
+
+<div class="viewcode-block" id="App.ConvertToLocalLibraries">
+<a class="viewcode-back" href="../HAMMR_GUI.html#HAMMR_GUI.App.ConvertToLocalLibraries">[docs]</a>
+    <span class="k">def</span> <span class="nf">ConvertToLocalLibraries</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">center_ToLocalLibrariesPageConfirmButton</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">state</span> <span class="o">=</span> <span class="s2">&quot;disabled&quot;</span><span class="p">)</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="s2">&quot;Selected method has been converted to local libraries please select a new method &quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">center_ToLocalLibrariesPageDonorPathLabel</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">text</span><span class="o">=</span> <span class="n">output</span><span class="p">)</span> 
+        <span class="n">SetMethodLibrariesToLocalVersion</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">File_to_Convert</span><span class="p">)</span> 
+        <span class="n">SetFilesToAddCheckSum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">File_to_Convert</span><span class="p">)</span>
+        <span class="c1">#PyHamilton_AddMultipleCheckSums(self.File_to_Convert)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">File_to_Convert</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span></div>
+
+<div class="viewcode-block" id="App.ConvertToRepoLibraries">
+<a class="viewcode-back" href="../HAMMR_GUI.html#HAMMR_GUI.App.ConvertToRepoLibraries">[docs]</a>
+    <span class="k">def</span> <span class="nf">ConvertToRepoLibraries</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">center_MethodToRepoLibrariesPageConfirmButton</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">state</span> <span class="o">=</span> <span class="s2">&quot;disabled&quot;</span><span class="p">)</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="s2">&quot;Selected method has been converted to repo libraries please select a new method &quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">center_MethodToRepoLibrariesPageDonorPathLabel</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">text</span><span class="o">=</span> <span class="n">output</span><span class="p">)</span>
+        <span class="n">SetMethodLibrariesToRepoVersion</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">File_to_Convert</span><span class="p">)</span> 
+        <span class="n">SetFilesToAddCheckSum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">File_to_Convert</span><span class="p">)</span>
+        <span class="c1">#PyHamilton_AddMultipleCheckSums(self.File_to_Convert) </span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">File_to_Convert</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span></div>
+
+<div class="viewcode-block" id="App.GetMethodFiles">
+<a class="viewcode-back" href="../HAMMR_GUI.html#HAMMR_GUI.App.GetMethodFiles">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetMethodFiles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">input_file_Raw</span> <span class="o">=</span> <span class="n">filedialog</span><span class="o">.</span><span class="n">askopenfile</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Select input file&#39;</span><span class="p">,</span> <span class="n">filetypes</span><span class="o">=</span><span class="p">((</span><span class="s1">&#39;HSL Files&#39;</span><span class="p">,</span> <span class="s1">&#39;*.hsl&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;All Files&#39;</span><span class="p">,</span> <span class="s1">&#39;*.*&#39;</span><span class="p">)))</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">input_file_Raw</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">input_file</span> <span class="o">=</span> <span class="n">input_file_Raw</span><span class="o">.</span><span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">FilesToMove</span> <span class="o">=</span> <span class="n">GetAllFilesRelatedToMethod</span><span class="p">(</span><span class="n">input_file</span><span class="p">)</span>
+        <span class="n">_foundAllFiles</span> <span class="o">=</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">FilesToMove</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">_foundAllFiles</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">center_SelectDeploymentButton</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="s2">&quot;enabled&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">center_DonorPathLabel</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">text</span> <span class="o">=</span> <span class="n">input_file</span><span class="p">,</span> <span class="n">font</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;DM Sans&quot;</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span> <span class="n">text_color</span><span class="o">=</span> <span class="s2">&quot;white&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">center_SelectDeploymentButton</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="s2">&quot;disabled&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">center_DonorPathLabel</span><span class="o">.</span><span class="n">_text</span> <span class="o">=</span> <span class="s2">&quot;Did not find all files, found: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">FilesToMove</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot; files&quot;</span></div>
+
+<div class="viewcode-block" id="App.GetLocation">
+<a class="viewcode-back" href="../HAMMR_GUI.html#HAMMR_GUI.App.GetLocation">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetLocation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">destination_Hamilton_file</span> <span class="o">=</span> <span class="n">filedialog</span><span class="o">.</span><span class="n">askdirectory</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Select Hamilton to deploy to&#39;</span><span class="p">,</span> <span class="n">mustexist</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">destination_Hamilton_file</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="n">prefix</span> <span class="o">=</span> <span class="n">destination_Hamilton_file</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/Methods&#39;</span><span class="p">)</span>
+        <span class="n">layoutFolder</span> <span class="o">=</span>  <span class="n">prefix</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span><span class="s1">&#39;/Layouts&#39;</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">FilesToMove</span><span class="p">)):</span>
+            <span class="n">file</span> <span class="o">=</span> <span class="n">CopyFileToLocation</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">FilesToMove</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">destination_Hamilton_file</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>     <span class="c1"># The first one in the list is ALWAYS the .hsl file</span>
+                <span class="n">SetMethodLayoutToLocalLayout</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">layoutFolder</span><span class="p">)</span>
+                <span class="n">SetFilesToAddCheckSum</span><span class="p">(</span><span class="n">file</span><span class="p">)</span></div>
+</div>
+
+                    
+    <span class="c1">#endregion    </span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">App</span><span class="p">()</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">mainloop</span><span class="p">()</span>
+</pre></div>
+
+	    </div>
+            <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2023, Spencer Gellner.
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/jucacrispim/sphinx_pdj_theme">theme</a> provided by <a href="https://poraodojuca.dev">Porão do Juca</a>.
+
+</footer>
+	</div>
+	</div>
+	  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+    <script type="text/javascript" src="../_static/documentation_options.js">
+
+    </script>
+    <script type="text/javascript" src="../_static/doctools.js">
+
+    </script>
+    <script type="text/javascript" src="../_static/sphinx_highlight.js">
+
+    </script>
+
+  
+
+   <script type="text/javascript"
+           src="../_static/js/theme.js"></script>
+
+   <script type="text/javascript"
+           src="../_static/js/pdj.js"></script>
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+  </body>
+</html>

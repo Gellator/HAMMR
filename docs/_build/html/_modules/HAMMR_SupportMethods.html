@@ -1,0 +1,364 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xml:lang="" lang="" version="-//W3C//DTD XHTML 1.1//EN" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="">
+    <link rel="icon" type="image/x-icon" href="">
+
+  
+  <title>HAMMR_SupportMethods &mdash; HAMMR 1.0 documentation</title>
+  
+
+  
+
+  
+
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'/>
+
+
+  <link rel="stylesheet" href="../_static/css/img.css" type="text/css"/>
+  
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../_static/css/pdj.css" type="text/css" />
+  
+
+  
+
+  <link rel="stylesheet" href="../_static/css/darker.css" type="text/css" media="(prefers-color-scheme: dark)"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="HAMMR 1.0 documentation" href="../index.html"/>
+        <link rel="up" title="Module code" href="index.html"/>
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="cache-control" content="public" />
+    <meta name="robots" content="follow, all" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Add jQuery library -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+    <script type="module" src="https://googlechromelabs.github.io/dark-mode-toggle/src/dark-mode-toggle.mjs"></script>
+
+  </head>
+
+  <body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+	
+        <a href="../index.html" class="fa fa-home"> HAMMR </a>
+	
+	
+        <div role="search">
+	  
+	  <form id ="rtd-search-form" class="wy-form"
+		action="../search.html" method="get">
+	    <input type="text" name="q" placeholder="Search docs" />
+	    <input type="hidden" name="check_keywords" value="yes" />
+	    <input type="hidden" name="area" value="default" />
+	  </form>
+	  
+	</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	
+          
+          
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+          
+        
+
+      </div>
+      &nbsp;
+    </nav>
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      <nav class="wy-nav-top" id="barra-mobile" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="#">HAMMR </a>
+      </nav>
+
+      <div class="wy-nav-content">
+	<div class="fundo-claro">
+	</div>
+	<div class="fundo-escuro">
+	</div>
+
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+	    
+	    <!-- <ul class="wy-breadcrumbs"> -->
+	    <!--   <li><a href="#">Docs</a> &raquo;</li> -->
+
+	    <!--   <li>Features</li> -->
+	    <!--   <li class="wy-breadcrumbs-aside"> -->
+
+	    <!-- 	<a href="_sources/index.txt" rel="nofollow"> View page source</a> -->
+
+	    <!--   </li> -->
+	    <!-- </ul> -->
+	    <!-- <hr/> -->
+	  </div>
+          <div role="main" class="">
+
+	    <div id="content" class="hfeed entry-container hentry">
+      	<div id="dark-mode-toggle-container">
+	  <dark-mode-toggle appearance="toggle" dark="switch to light mode" light="switch to dark mode">
+	  </dark-mode-toggle>
+	</div>
+  <h1>Source code for HAMMR_SupportMethods</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+
+<div class="viewcode-block" id="SetMethodLibrariesToLocalVersion">
+<a class="viewcode-back" href="../HAMMR_SupportMethods.html#HAMMR_SupportMethods.SetMethodLibrariesToLocalVersion">[docs]</a>
+<span class="k">def</span> <span class="nf">SetMethodLibrariesToLocalVersion</span><span class="p">(</span><span class="n">input_file</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Description:</span>
+<span class="sd">        Converts the given .HSL file&#39;s library include references from current to the standard location on Hamilton install (C:\Program Files (x86)\HAMILTON\Library)</span>
+<span class="sd">    Args:</span>
+<span class="sd">        input_file (string): A file path to a .HSL file</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">search_string</span> <span class="o">=</span> <span class="s1">&#39; namespace _Method { #include &quot;&#39;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">search_string</span><span class="p">):</span>
+
+            <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;HSL&#39;</span><span class="p">):</span>
+                <span class="n">before</span> <span class="o">=</span> <span class="n">line</span>
+                <span class="n">right</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;HSL&#39;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">right</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                <span class="n">final</span> <span class="o">=</span> <span class="n">search_string</span> <span class="o">+</span> <span class="s1">&#39;HSL&#39;</span> <span class="o">+</span> <span class="n">right</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">final</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">line</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;Sequence&#39;</span><span class="p">):</span>
+                <span class="n">before</span> <span class="o">=</span> <span class="n">line</span>
+                <span class="n">right</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;SequenceTools_V3.&#39;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">right</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                <span class="n">final</span> <span class="o">=</span> <span class="n">search_string</span> <span class="o">+</span> <span class="s1">&#39;SequenceTools_V3</span><span class="se">\\</span><span class="s1">SequenceTools_V3.&#39;</span> <span class="o">+</span> <span class="n">right</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">final</span><span class="p">)</span>
+            <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">before</span><span class="p">,</span><span class="n">final</span><span class="p">)</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">]</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+        <span class="n">file</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="CopyFileToLocation">
+<a class="viewcode-back" href="../HAMMR_SupportMethods.html#HAMMR_SupportMethods.CopyFileToLocation">[docs]</a>
+<span class="k">def</span> <span class="nf">CopyFileToLocation</span><span class="p">(</span><span class="n">source_path</span><span class="p">,</span> <span class="n">destination_path</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Description:</span>
+<span class="sd">        Copies a singular file to a new location.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        source_path (string): Path to the file you wish to copy.</span>
+<span class="sd">        destination_path (string): Path to the location you want you copy to be made.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">newpath</span> <span class="o">=</span> <span class="n">shutil</span><span class="o">.</span><span class="n">copy2</span><span class="p">(</span><span class="n">source_path</span><span class="p">,</span> <span class="n">destination_path</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;File copied successfully!&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">newpath</span>
+    <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Source file not found.&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">IsADirectoryError</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Source is a directory, not a file.&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">shutil</span><span class="o">.</span><span class="n">SameFileError</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Source and destination paths are the same.&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;An error occurred: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="SetMethodLibrariesToRepoVersion">
+<a class="viewcode-back" href="../HAMMR_SupportMethods.html#HAMMR_SupportMethods.SetMethodLibrariesToRepoVersion">[docs]</a>
+<span class="k">def</span> <span class="nf">SetMethodLibrariesToRepoVersion</span><span class="p">(</span><span class="n">input_file</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Description:</span>
+<span class="sd">        Converts the given .HSL file&#39;s library include references from current to the Repo specific location (C:\Program Files (x86)\HAMILTON\Repo\ProDevHamilton\Main Development\Library\\)</span>
+<span class="sd">    Args:</span>
+<span class="sd">        input_file (string): A file path to a .HSL file</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">exclude_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;HSLMETEDLib.hs_&quot;</span><span class="p">,</span><span class="s2">&quot;HSLMECCLib.hs_&quot;</span><span class="p">,</span><span class="s2">&quot;HSLPTLLib.hsl&quot;</span><span class="p">,</span><span class="s2">&quot;HSLSTCCLib.hs_&quot;</span> <span class="p">]</span> <span class="c1"># Must exclude these as modifying these messes with deeper layers of C++ code to reference files.</span>
+    <span class="n">search_string</span> <span class="o">=</span> <span class="s1">&#39;namespace _Method { #include &quot;&#39;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+              
+    <span class="n">updated_lines</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;namespace _Method { #include &quot;&#39;</span><span class="p">,</span> <span class="s1">&#39;namespace _Method { #include &quot;C:\Program Files (x86)\HAMILTON\Repo\ProDevHamilton\Main Development\Library</span><span class="se">\\</span><span class="s1">&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">any</span><span class="p">(</span><span class="n">exclude_str</span> <span class="ow">in</span> <span class="n">line</span> <span class="k">for</span> <span class="n">exclude_str</span> <span class="ow">in</span> <span class="n">exclude_list</span><span class="p">)]</span>               
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+        <span class="n">file</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">updated_lines</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="SetMethodLayoutToLocalLayout">
+<a class="viewcode-back" href="../HAMMR_SupportMethods.html#HAMMR_SupportMethods.SetMethodLayoutToLocalLayout">[docs]</a>
+<span class="k">def</span> <span class="nf">SetMethodLayoutToLocalLayout</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">LayoutFolder</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Description:</span>
+<span class="sd">        Converts the .HSL reference for both .Lay and .Res to the version in the given layout folder</span>
+<span class="sd">    Args:</span>
+<span class="sd">        input_file (string): What .HSL file to convert</span>
+<span class="sd">        LayoutFolder (string): The name of the hamilton robot folder the new layout .Lay and .Res file exist (NOT the PATH, EX: &quot;Ham-08 Mothra&quot;)</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        None </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">pre</span> <span class="o">=</span> <span class="s1">&#39;global device ML_STAR (&quot;&#39;</span>
+    <span class="n">pre2</span> <span class="o">=</span> <span class="s1">&#39;#include &quot;&#39;</span>
+    <span class="n">before</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="n">before2</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="n">final</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
+    <span class="n">final2</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+            <span class="n">lines</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;global&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">line</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;\Layouts&#39;</span><span class="p">):</span>
+            <span class="n">before</span> <span class="o">=</span> <span class="n">line</span>
+            <span class="n">right</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;\Layouts&#39;</span><span class="p">)</span>
+            <span class="n">final</span> <span class="o">=</span> <span class="n">pre</span> <span class="o">+</span> <span class="n">LayoutFolder</span> <span class="o">+</span> <span class="n">right</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">final</span><span class="p">)</span>
+            <span class="n">final</span> <span class="o">=</span> <span class="n">final</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">final</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;#include &quot;C:\Program Files (x86)\HAMILTON&#39;</span><span class="p">):</span>
+            <span class="n">before2</span> <span class="o">=</span> <span class="n">line</span>
+            <span class="n">right</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;\Layouts&#39;</span><span class="p">)</span>
+            <span class="n">final2</span> <span class="o">=</span> <span class="n">pre2</span> <span class="o">+</span> <span class="n">LayoutFolder</span> <span class="o">+</span> <span class="n">right</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">final2</span><span class="p">)</span>
+            <span class="n">final2</span> <span class="o">=</span> <span class="n">final2</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">final2</span><span class="p">)</span>
+    <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">before</span><span class="p">,</span><span class="n">final</span><span class="p">)</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">]</span>
+    <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">before2</span><span class="p">,</span><span class="n">final2</span><span class="p">)</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">]</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+        <span class="n">file</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>  </div>
+
+
+<div class="viewcode-block" id="GetFoldersInDir">
+<a class="viewcode-back" href="../HAMMR_SupportMethods.html#HAMMR_SupportMethods.GetFoldersInDir">[docs]</a>
+<span class="k">def</span> <span class="nf">GetFoldersInDir</span><span class="p">(</span><span class="n">directoryPath</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Description:</span>
+<span class="sd">        Helper function to grab all available folders within a location excluding the .git folder.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        directoryPath (string): The path of the directory to search.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        folderNames (list[string]): A list of strings of the names of each folder found.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">folderNames</span><span class="o">=</span><span class="p">[]</span> 
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">directoryPath</span><span class="p">):</span>
+        <span class="n">itemPath</span><span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">directoryPath</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">itemPath</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">item</span> <span class="o">!=</span> <span class="s2">&quot;.git&quot;</span><span class="p">:</span>
+                <span class="n">folderNames</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">folderNames</span>      </div>
+
+
+<div class="viewcode-block" id="GetHSLFileInDeploymentLocation">
+<a class="viewcode-back" href="../HAMMR_SupportMethods.html#HAMMR_SupportMethods.GetHSLFileInDeploymentLocation">[docs]</a>
+<span class="k">def</span> <span class="nf">GetHSLFileInDeploymentLocation</span><span class="p">(</span><span class="n">FilesToMove</span><span class="p">,</span> <span class="n">folder</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Description:</span>
+<span class="sd">        WARnING: Combination of both CopyFileToLocation and SetMethodLayoutToLocalLayout :WARNING</span>
+<span class="sd">        Creates a destination location depending on given folder and copies all files in FilesToMove to this location along with setting the layout of the .HSL file to that destinations version.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        FilesToMove (List[string]): A list of file paths to be copied to a location. The FilesToMove[0] must be the .HSL file.</span>
+<span class="sd">        folder (string): The Hamilton Robot repo folder location (EX: &quot;Ham-08 Mothra&quot;).</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        forcheck (string): A filepath to the newly created and edited .HSL file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">prefix</span> <span class="o">=</span><span class="s2">&quot;C:\Program Files (x86)\HAMILTON\Repo\ProDevHamilton/&quot;</span>
+    <span class="n">MethodDestination</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="n">folder</span> <span class="o">+</span><span class="s1">&#39;/Methods&#39;</span>
+    <span class="n">layoutFolder</span> <span class="o">=</span>  <span class="n">prefix</span> <span class="o">+</span> <span class="n">folder</span> <span class="o">+</span><span class="s1">&#39;/Layouts&#39;</span>            
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">FilesToMove</span><span class="p">)):</span>
+        <span class="n">file</span> <span class="o">=</span> <span class="n">CopyFileToLocation</span><span class="p">(</span><span class="n">FilesToMove</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">MethodDestination</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">SetMethodLayoutToLocalLayout</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">layoutFolder</span><span class="p">)</span>
+            <span class="n">forcheck</span> <span class="o">=</span> <span class="n">file</span>
+        
+        <span class="k">return</span> <span class="n">forcheck</span></div>
+
+
+<div class="viewcode-block" id="GetAllFilesRelatedToMethod">
+<a class="viewcode-back" href="../HAMMR_SupportMethods.html#HAMMR_SupportMethods.GetAllFilesRelatedToMethod">[docs]</a>
+<span class="k">def</span> <span class="nf">GetAllFilesRelatedToMethod</span><span class="p">(</span><span class="n">input_file</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Description:</span>
+<span class="sd">        Searches the given input_files location for files that share the same name but different types</span>
+<span class="sd">    Args:</span>
+<span class="sd">        input_file (string): File path to the .HSL file for a method</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        _relatedFiles (list[string]): A list of file paths that share the same name but different type as input_file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_relatedFiles</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">directory</span><span class="p">,</span> <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">input_file</span><span class="p">)</span>
+    <span class="n">file_name</span><span class="p">,</span> <span class="n">file_extension</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    <span class="n">_relatedFiles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">input_file</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">root</span><span class="p">,</span> <span class="n">dirs</span><span class="p">,</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">directory</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+            <span class="n">name</span><span class="p">,</span> <span class="n">extension</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">file_name</span> <span class="ow">in</span> <span class="n">file</span> <span class="ow">and</span> <span class="n">extension</span> <span class="o">!=</span> <span class="n">file_extension</span><span class="p">:</span>
+                <span class="n">temp</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="n">file</span><span class="p">)</span>
+                <span class="n">temp</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;/&#39;</span><span class="p">)</span>
+                <span class="n">_relatedFiles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">_relatedFiles</span></div>
+
+</pre></div>
+
+	    </div>
+            <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2023, Spencer Gellner.
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/jucacrispim/sphinx_pdj_theme">theme</a> provided by <a href="https://poraodojuca.dev">Porão do Juca</a>.
+
+</footer>
+	</div>
+	</div>
+	  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+    <script type="text/javascript" src="../_static/documentation_options.js">
+
+    </script>
+    <script type="text/javascript" src="../_static/doctools.js">
+
+    </script>
+    <script type="text/javascript" src="../_static/sphinx_highlight.js">
+
+    </script>
+
+  
+
+   <script type="text/javascript"
+           src="../_static/js/theme.js"></script>
+
+   <script type="text/javascript"
+           src="../_static/js/pdj.js"></script>
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+  </body>
+</html>

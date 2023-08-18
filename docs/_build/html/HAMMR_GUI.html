@@ -1,0 +1,276 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xml:lang="" lang="" version="-//W3C//DTD XHTML 1.1//EN" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="">
+    <link rel="icon" type="image/x-icon" href="">
+
+  
+  <title>HAMMR_GUI module &mdash; HAMMR 1.0 documentation</title>
+  
+
+  
+
+  
+
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'/>
+
+
+  <link rel="stylesheet" href="_static/css/img.css" type="text/css"/>
+  
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  
+    <link rel="stylesheet" href="_static/css/pdj.css" type="text/css" />
+  
+
+  
+
+  <link rel="stylesheet" href="_static/css/darker.css" type="text/css" media="(prefers-color-scheme: dark)"/>
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="HAMMR 1.0 documentation" href="index.html"/>
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="cache-control" content="public" />
+    <meta name="robots" content="follow, all" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Add jQuery library -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+    <script type="module" src="https://googlechromelabs.github.io/dark-mode-toggle/src/dark-mode-toggle.mjs"></script>
+
+  </head>
+
+  <body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+	
+        <a href="index.html" class="fa fa-home"> HAMMR </a>
+	
+	
+        <div role="search">
+	  
+	  <form id ="rtd-search-form" class="wy-form"
+		action="search.html" method="get">
+	    <input type="text" name="q" placeholder="Search docs" />
+	    <input type="hidden" name="check_keywords" value="yes" />
+	    <input type="hidden" name="area" value="default" />
+	  </form>
+	  
+	</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	
+          
+          
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">HAMMR_GUI module</a><ul>
+<li><a class="reference internal" href="#HAMMR_GUI.App"><code class="docutils literal notranslate"><span class="pre">App</span></code></a><ul>
+<li><a class="reference internal" href="#HAMMR_GUI.App.ConvertMethodToLocalLibrariesPage"><code class="docutils literal notranslate"><span class="pre">App.ConvertMethodToLocalLibrariesPage()</span></code></a></li>
+<li><a class="reference internal" href="#HAMMR_GUI.App.ConvertMethodToRepoLibrariesPage"><code class="docutils literal notranslate"><span class="pre">App.ConvertMethodToRepoLibrariesPage()</span></code></a></li>
+<li><a class="reference internal" href="#HAMMR_GUI.App.ConvertToLocalLibraries"><code class="docutils literal notranslate"><span class="pre">App.ConvertToLocalLibraries()</span></code></a></li>
+<li><a class="reference internal" href="#HAMMR_GUI.App.ConvertToRepoLibraries"><code class="docutils literal notranslate"><span class="pre">App.ConvertToRepoLibraries()</span></code></a></li>
+<li><a class="reference internal" href="#HAMMR_GUI.App.CreateCheckBoxPerDestination"><code class="docutils literal notranslate"><span class="pre">App.CreateCheckBoxPerDestination()</span></code></a></li>
+<li><a class="reference internal" href="#HAMMR_GUI.App.Delete_Pages"><code class="docutils literal notranslate"><span class="pre">App.Delete_Pages()</span></code></a></li>
+<li><a class="reference internal" href="#HAMMR_GUI.App.DeployMethodPage"><code class="docutils literal notranslate"><span class="pre">App.DeployMethodPage()</span></code></a></li>
+<li><a class="reference internal" href="#HAMMR_GUI.App.DeployMethodToSelectedRobots"><code class="docutils literal notranslate"><span class="pre">App.DeployMethodToSelectedRobots()</span></code></a></li>
+<li><a class="reference internal" href="#HAMMR_GUI.App.DeselectPageButtons"><code class="docutils literal notranslate"><span class="pre">App.DeselectPageButtons()</span></code></a></li>
+<li><a class="reference internal" href="#HAMMR_GUI.App.GetLocation"><code class="docutils literal notranslate"><span class="pre">App.GetLocation()</span></code></a></li>
+<li><a class="reference internal" href="#HAMMR_GUI.App.GetMethodFiles"><code class="docutils literal notranslate"><span class="pre">App.GetMethodFiles()</span></code></a></li>
+<li><a class="reference internal" href="#HAMMR_GUI.App.GetMethodForConvert"><code class="docutils literal notranslate"><span class="pre">App.GetMethodForConvert()</span></code></a></li>
+<li><a class="reference internal" href="#HAMMR_GUI.App.HomePage"><code class="docutils literal notranslate"><span class="pre">App.HomePage()</span></code></a></li>
+<li><a class="reference internal" href="#HAMMR_GUI.App.SelectPage"><code class="docutils literal notranslate"><span class="pre">App.SelectPage()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+          
+        
+
+      </div>
+      &nbsp;
+    </nav>
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      <nav class="wy-nav-top" id="barra-mobile" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="#">HAMMR </a>
+      </nav>
+
+      <div class="wy-nav-content">
+	<div class="fundo-claro">
+	</div>
+	<div class="fundo-escuro">
+	</div>
+
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+	    
+	    <!-- <ul class="wy-breadcrumbs"> -->
+	    <!--   <li><a href="#">Docs</a> &raquo;</li> -->
+
+	    <!--   <li>Features</li> -->
+	    <!--   <li class="wy-breadcrumbs-aside"> -->
+
+	    <!-- 	<a href="_sources/index.txt" rel="nofollow"> View page source</a> -->
+
+	    <!--   </li> -->
+	    <!-- </ul> -->
+	    <!-- <hr/> -->
+	  </div>
+          <div role="main" class="">
+
+	    <div id="content" class="hfeed entry-container hentry">
+      	<div id="dark-mode-toggle-container">
+	  <dark-mode-toggle appearance="toggle" dark="switch to light mode" light="switch to dark mode">
+	  </dark-mode-toggle>
+	</div>
+  <section id="hammr-gui-module">
+<h1>HAMMR_GUI module<a class="headerlink" href="#hammr-gui-module" title="Link to this heading">¶</a></h1>
+<dl class="py class" id="module-HAMMR_GUI">
+<dt class="sig sig-object py" id="HAMMR_GUI.App">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">HAMMR_GUI.</span></span><span class="sig-name descname"><span class="pre">App</span></span><a class="reference internal" href="_modules/HAMMR_GUI.html#App"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAMMR_GUI.App" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">CTk</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="HAMMR_GUI.App.ConvertMethodToLocalLibrariesPage">
+<span class="sig-name descname"><span class="pre">ConvertMethodToLocalLibrariesPage</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAMMR_GUI.html#App.ConvertMethodToLocalLibrariesPage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAMMR_GUI.App.ConvertMethodToLocalLibrariesPage" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="HAMMR_GUI.App.ConvertMethodToRepoLibrariesPage">
+<span class="sig-name descname"><span class="pre">ConvertMethodToRepoLibrariesPage</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAMMR_GUI.html#App.ConvertMethodToRepoLibrariesPage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAMMR_GUI.App.ConvertMethodToRepoLibrariesPage" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="HAMMR_GUI.App.ConvertToLocalLibraries">
+<span class="sig-name descname"><span class="pre">ConvertToLocalLibraries</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAMMR_GUI.html#App.ConvertToLocalLibraries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAMMR_GUI.App.ConvertToLocalLibraries" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="HAMMR_GUI.App.ConvertToRepoLibraries">
+<span class="sig-name descname"><span class="pre">ConvertToRepoLibraries</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAMMR_GUI.html#App.ConvertToRepoLibraries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAMMR_GUI.App.ConvertToRepoLibraries" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="HAMMR_GUI.App.CreateCheckBoxPerDestination">
+<span class="sig-name descname"><span class="pre">CreateCheckBoxPerDestination</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">masterframe</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAMMR_GUI.html#App.CreateCheckBoxPerDestination"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAMMR_GUI.App.CreateCheckBoxPerDestination" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="HAMMR_GUI.App.Delete_Pages">
+<span class="sig-name descname"><span class="pre">Delete_Pages</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAMMR_GUI.html#App.Delete_Pages"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAMMR_GUI.App.Delete_Pages" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="HAMMR_GUI.App.DeployMethodPage">
+<span class="sig-name descname"><span class="pre">DeployMethodPage</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAMMR_GUI.html#App.DeployMethodPage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAMMR_GUI.App.DeployMethodPage" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="HAMMR_GUI.App.DeployMethodToSelectedRobots">
+<span class="sig-name descname"><span class="pre">DeployMethodToSelectedRobots</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAMMR_GUI.html#App.DeployMethodToSelectedRobots"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAMMR_GUI.App.DeployMethodToSelectedRobots" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="HAMMR_GUI.App.DeselectPageButtons">
+<span class="sig-name descname"><span class="pre">DeselectPageButtons</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAMMR_GUI.html#App.DeselectPageButtons"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAMMR_GUI.App.DeselectPageButtons" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="HAMMR_GUI.App.GetLocation">
+<span class="sig-name descname"><span class="pre">GetLocation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAMMR_GUI.html#App.GetLocation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAMMR_GUI.App.GetLocation" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="HAMMR_GUI.App.GetMethodFiles">
+<span class="sig-name descname"><span class="pre">GetMethodFiles</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAMMR_GUI.html#App.GetMethodFiles"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAMMR_GUI.App.GetMethodFiles" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="HAMMR_GUI.App.GetMethodForConvert">
+<span class="sig-name descname"><span class="pre">GetMethodForConvert</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ConfirmButton</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Label</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAMMR_GUI.html#App.GetMethodForConvert"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAMMR_GUI.App.GetMethodForConvert" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="HAMMR_GUI.App.HomePage">
+<span class="sig-name descname"><span class="pre">HomePage</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAMMR_GUI.html#App.HomePage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAMMR_GUI.App.HomePage" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="HAMMR_GUI.App.SelectPage">
+<span class="sig-name descname"><span class="pre">SelectPage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">btn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">page</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAMMR_GUI.html#App.SelectPage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAMMR_GUI.App.SelectPage" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+	    </div>
+            <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2023, Spencer Gellner.
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/jucacrispim/sphinx_pdj_theme">theme</a> provided by <a href="https://poraodojuca.dev">Porão do Juca</a>.
+
+</footer>
+	</div>
+	</div>
+	  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+    <script type="text/javascript" src="_static/documentation_options.js">
+
+    </script>
+    <script type="text/javascript" src="_static/doctools.js">
+
+    </script>
+    <script type="text/javascript" src="_static/sphinx_highlight.js">
+
+    </script>
+
+  
+
+   <script type="text/javascript"
+           src="_static/js/theme.js"></script>
+
+   <script type="text/javascript"
+           src="_static/js/pdj.js"></script>
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+  </body>
+</html>
